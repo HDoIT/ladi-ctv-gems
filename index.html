@@ -59,6 +59,34 @@
             background-color: rgba(255, 255, 255, 0.3) !important;
         }
 
+        .zalo-group-invite {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px dashed rgba(255, 255, 255, 0.3);
+        }
+
+        .zalo-group-invite p {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .zalo-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background-color: #0068ff;
+            color: white !important;
+            padding: 8px 15px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .zalo-btn:hover {
+            background-color: #0055d4;
+        }
+
         a,
         abbr,
         acronym,
@@ -331,7 +359,7 @@
         .ladipage-message .ladipage-message-box {
             width: 400px;
             max-width: calc(100% - 50px);
-            height: 160px;
+            height: 260px;
             border: 1px solid rgba(0, 0, 0, .3);
             background-color: #fff;
             position: fixed;
@@ -364,7 +392,8 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-            word-break: break-word
+            word-break: break-word;
+            height: 170px;
         }
 
         .ladipage-message .ladipage-message-box .ladipage-message-close {
@@ -4973,10 +5002,61 @@
     <script id="script_ladipage_run"
         type="text/javascript">(function () { var run = function () { if (typeof window.LadiPageScript == "undefined" || typeof window.ladi == "undefined" || window.ladi == undefined) { setTimeout(run, 100); return; } window.LadiPageApp = window.LadiPageApp || new window.LadiPageAppV2(); window.LadiPageScript.runtime.ladipage_id = '68576cfc3de8c90011b9688d'; window.LadiPageScript.runtime.publish_platform = 'LADIPAGE'; window.LadiPageScript.runtime.version = '1751094776747'; window.LadiPageScript.runtime.cdn_url = 'https://w.ladicdn.com/v5/source/'; window.LadiPageScript.runtime.DOMAIN_FREE = ["preview.ldpdemo.com", "ldp.page"]; window.LadiPageScript.runtime.bodyFontSize = 12; window.LadiPageScript.runtime.store_id = "68576bb71e87b40012fa4986"; window.LadiPageScript.runtime.store_ladiuid = "68576bb64ea45f001fbe7532"; window.LadiPageScript.runtime.time_zone = 7; window.LadiPageScript.runtime.currency = "VND"; window.LadiPageScript.runtime.convert_replace_str = true; window.LadiPageScript.runtime.desktop_width = 960; window.LadiPageScript.runtime.mobile_width = 420; window.LadiPageScript.runtime.formdata = true; window.LadiPageScript.runtime.tracking_button_click = true; window.LadiPageScript.runtime.publish_time = 1751107273105; window.LadiPageScript.runtime.lang = "vi"; window.LadiPageScript.run(true); window.LadiPageScript.runEventScroll(); }; run(); })();</script>
 
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const messageBox = document.querySelector('.ladipage-message-box');
+            alert(0)
+
+            if (!messageBox) return;
+
+            alert(1)
+            const zaloInviteHTML = `
+                <div class="zalo-group-invite" style="margin-top: 15px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.3);">
+                <p style="margin-bottom: 10px; font-weight: bold;">Tham gia ngay Group Zalo để nhận ưu đãi:</p>
+                <a href="https://zalo.me/g/aabxld800" target="_blank" class="zalo-btn" style="display: inline-flex; align-items: center; gap: 8px; background-color: #0068ff; color: white !important; padding: 8px 15px; border-radius: 4px; text-decoration: none; font-weight: 500;">
+                    <img src="https://stc-zaloprofile.zdn.vn/pc/v1/images/zalo_sharelogo_120.png" width="20" alt="Zalo">
+                    Vào Group Zalo
+                </a>
+                </div>
+            `;
+
+            alert(2)
+
+            const messageText = messageBox.querySelector('.ladipage-message-text');
+            if (messageText) {
+                alert(3)
+                messageText.insertAdjacentHTML('beforeend', zaloInviteHTML);
+            }
+            alert(4)
+
+        }); 
+    </script>
+
     <script>
         document.querySelector('.ladi-form').addEventListener('submit', function (e) {
             e.preventDefault();
-
+            setTimeout(()=>{
+                    const messageBox = document.querySelector('.ladipage-message-box');
+                    if (!messageBox.querySelector('.zalo-group-invite')) {
+                        const zaloHTML = `
+                <div class="zalo-group-invite" style="margin-top:15px;padding-top:15px;border-top:1px dashed rgba(255,255,255,0.3)">
+                    <p style="margin-bottom:10px;font-weight:bold">Tham gia Group Zalo để nhận nhiều thông tin:</p>
+                    <a href="https://zalo.me/g/aabxld800" target="_blank" 
+                       style="background:#0068ff;color:white;padding:8px 15px;border-radius:4px;display:inline-flex;align-items:center;gap:8px;text-decoration:none">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="10%" height="10%"
+                                    preserveAspectRatio="none" viewBox="0 0 32 32" class=""
+                                    fill="rgba(232, 59, 48, 1.0)">
+                                    <image href="https://w.ladicdn.com/ladiui/icons/social/zalo.svg" height="32"
+                                        width="32"></image>
+                                </svg>
+                        Vào Group Zalo
+                    </a>
+                </div>
+            `;
+                        messageBox.querySelector('.ladipage-message-text').insertAdjacentHTML('beforeend', zaloHTML);
+                    }
+                },1000)
             const data = {
                 name: document.querySelector('input[name="name"]').value,
                 email: document.querySelector('input[name="email"]').value,
@@ -4994,11 +5074,11 @@
                     'Content-Type': 'application/json'
                 }
             })
-                .then(res => res.json())
-                .then(result => {
-                    // alert(result.message);
+                .then(() => {
+
                 })
                 .catch(err => console.log(err));
+
         });
     </script>
 </body>
