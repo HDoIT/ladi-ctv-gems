@@ -5449,21 +5449,28 @@
             { name: "Phạm Quốc Tuấn", time: "10 phút trước" }
         ];
 
-        let currentIndex = 0; // Thêm biến currentIndex
+        const vietnameseAvatars = [
+            "/images/avt/1.jpg",
+            "/images/avt/2.webp",
+            "/images/avt/3.jpg",
+            "/images/avt/4.webp",
+            "/images/avt/5.jpg"
+        ];
+
+        let currentIndex = 0;
 
         function showNotification() {
             const container = document.querySelector('.notification-container');
             const notification = document.createElement('div');
             notification.className = 'notification';
 
-            // Random avatar (different each time)
-            const randomAvatar = `https://i.pravatar.cc/150?img=${Math.floor(Math.random() * 70)}`;
+            // Lấy avatar tương ứng với từng notification (hoặc random nếu muốn)
+            const avatar = vietnameseAvatars[currentIndex % vietnameseAvatars.length];
 
-            // Get notification in order
             const notiData = notifications[currentIndex];
 
             notification.innerHTML = `
-        <img src="${randomAvatar}" class="notification-avatar" alt="Avatar">
+        <img src="${avatar}" class="notification-avatar" alt="Avatar">
         <div class="notification-content">
             <strong>${notiData.name}</strong> vừa đăng ký trở thành Đối tác An Phát Gems
             <div class="notification-time">${notiData.time}</div>
@@ -5473,13 +5480,16 @@
             container.appendChild(notification);
             currentIndex = (currentIndex + 1) % notifications.length;
 
+            // Tăng thời gian hiển thị: 12 giây
             setTimeout(() => {
                 notification.remove();
-            }, 5000);
+            }, 12000);
         }
 
+        // Hiển thị noti đầu tiên
         showNotification();
 
+        // Lặp lại hiển thị với khoảng cách 8-10 giây ngẫu nhiên
         setInterval(showNotification, Math.random() * 1000 + 5000);
     </script>
 </body>
